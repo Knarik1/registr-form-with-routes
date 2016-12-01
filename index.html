@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Form registration</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <style>
+        input.ng-invalid.ng-dirty{border: 1px solid darkred;}
+        body{
+            background-color: paleturquoise;
+        }
+    </style>
+    <script src="angular.min.js"></script>
+    <script src="node_modules/angular-route/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="js/controllers/ValidCtrl.js"></script>
+    <script src="js/services/countries.js"></script>
+    <script src="js/directives/confirmPwd.js"></script>
+    <script src="js/services/userPost.js"></script>
+    <script>
+        document.write('<base href="' + document.location + '" />');
+    </script>
+</head>
+<body>
+<div ng-view></div>
+</body>
+</html>

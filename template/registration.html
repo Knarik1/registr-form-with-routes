@@ -1,0 +1,148 @@
+<div class="container" ng-controller="ValidCtrl">
+    <div class="page-header text-center">
+        <h1>Registration form </h1>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            {{user}}
+            <form  name="userForm" ng-submit="register(user)" novalidate>
+
+                <div class="form-group">
+                    <label for="fname">First name<span style="color:red;">*</span></label>
+                    <input type="text"
+                           class="form-control"
+                           autofocus="autofocus"
+                           ng-model="user.firstName"
+                           ng-pattern='/^[a-zA-Z\\s]*$/'
+                           name="firstName"
+                           required="required"
+                           id="fname">
+                    <span class="text-danger" ng-show="userForm.firstName.$dirty && userForm.firstName.$error.required">Required!</span>
+                    <span class="text-danger" ng-show="userForm.firstName.$error.pattern">Not valid name!</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="lname">Last name<span style="color:red;">*</span></label>
+                    <input type="text"
+                           class="form-control"
+                           id="lname"
+                           ng-model="user.lastName"
+                           ng-pattern='/^[a-zA-Z\\s]*$/'
+                           name="lastName"
+                           required="required">
+                    <span class="text-danger" ng-show="userForm.lastName.$dirty && userForm.lastName.$error.required">Required!</span>
+                    <span class="text-danger" ng-show="userForm.lastName.$error.pattern">Not valid last name!</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email address<span style="color:red;">*</span></label>
+                    <input type="email"
+                           class="form-control"
+                           id="email"
+                           ng-model="user.email"
+                           ng-pattern='/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'
+                           name="email"
+                           required="required">
+                    <span class="text-danger" ng-show="userForm.email.$dirty && userForm.email.$error.required">Required!</span>
+                    <span class="text-danger" ng-show="userForm.email.$error.pattern">Not valid email!</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text"
+                           class="form-control"
+                           id="address"
+                           ng-model="user.address"
+                           name="address">
+                </div>
+
+                <div class="radio">
+                    <b>Choose gender </b><span style="color:red;">*</span>
+                    <label>
+                        <input type="radio" value="male" ng-model="user.gender" name="gender"  required="required"> male
+                    </label>
+                    <label>
+                        <input type="radio" value="female" ng-model="user.gender" name="gender"  required="required"> female
+                    </label>
+                    <span class="text-danger" ng-show="userForm.gender.$dirty && userForm.gender.$error.required">Required!</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country<span style="color:red;">*</span></label>
+                    <select class="form-control" id="country" ng-model="user.country" name="country"  required="required">
+                        <option value="">Please Select Country</option>
+                        <option ng-repeat="country in countries">{{ country }}</option>
+                    </select>
+                    <span class="text-danger" ng-show="userForm.country.$dirty && userForm.country.$error.required">Required!</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="zip-code">Zip code<span style="color:red;">*</span></label>
+                    <input type="text"
+                           class="form-control"
+                           id="zip-code"
+                           ng-model="user.zipcode"
+                           name="zipcode"
+                           ng-pattern='/^[0-9]*$/'
+                           required="required">
+                    <span class="text-danger" ng-show="userForm.zipcode.$dirty && userForm.zipcode.$error.required">Required!</span>
+                    <span class="text-danger" ng-show="userForm.zipcode.$error.pattern">Not valid zipcode!</span>
+                </div>
+
+                <div class="radio">
+                    <b>Choose language</b><span style="color:red;">*</span>
+                    <label>
+                        <input type="radio" value="am" ng-model="user.lang" name="lang"  required="required"> am
+                    </label>
+                    <label>
+                        <input type="radio" value="eng"  ng-model="user.lang" name="lang"  required="required"> eng
+                    </label>
+                    <label>
+                        <input type="radio" value="ru"  ng-model="user.lang" name="lang"  required="required"> ru
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="textarea">About</label>
+                        <textarea class="form-control"
+                                  id="textarea"
+                                  rows="3"
+                                  name="textarea"
+                                  ng-model="user.textarea"
+                                ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password<span style="color:red;">*</span></label>
+                    <input type="password"
+                           class="form-control"
+                           id="password"
+                           name="password"
+                           ng-model="user.password"
+                           required="required">
+                    <span class="text-danger" ng-show="userForm.password.$dirty && userForm.password.$error.required">Required!</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordConfirmation">Confirm password<span style="color:red;">*</span></label>
+                    <input type="password"
+                           class="form-control"
+                           id="passwordConfirmation"
+                           name="passwordConfirmation"
+                           ng-model="passwordConfirmation"
+                           confirm-pwd="user.password"
+                           required="required">
+                    <!--ng-pattern="/^{{password}}$/"-->
+
+                    <span class="text-danger" ng-show="userForm.passwordConfirmation.$dirty && userForm.passwordConfirmation.$error.required" >Required!</span>
+                    <span class="text-danger" ng-show="userForm.passwordConfirmation.$dirty && userForm.passwordConfirmation.$invalid">Passwords do not match.</span>
+                </div>
+
+                <button type="submit" class="btn btn-default" ng-disabled="userForm.$invalid">Submit</button>
+                <button type="reset" class="btn btn-default" ng-click="reset()">Reset</button>
+                {{ PostDataResponse }}
+            </form>
+        </div>
+    </div>
+</div>
